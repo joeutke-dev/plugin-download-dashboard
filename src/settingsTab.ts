@@ -16,7 +16,7 @@ export class SettingsTab extends PluginSettingTab {
 		new Setting(containerEl)
 			.setName("GitHub personal access token")
 			.setDesc(
-				"Optional. Raises the GitHub API rate limit (60 requests/hour when unauthenticated) and is used to read theme download counts from release assets. A classic token with no scopes is enough — it only reads public data."
+				"Optional. Only used to read release publish dates from the GitHub API (the time axis for the download charts). Raises the rate limit from 60 to 5,000 requests/hour — set one if you watchlist or browse many plugins and hit the limit. A classic token with no scopes is enough; it only reads public data."
 			)
 			.addText((text) => {
 				text.inputEl.type = "password";
