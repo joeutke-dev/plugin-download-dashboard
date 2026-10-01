@@ -1,0 +1,12 @@
+# npm
+node_modules/
+
+# build output — uploaded to GitHub releases, not committed
+main.js
+*.js.map
+
+# obsidian runtime data
+data.json
+
+# macOS
+.DS_Store

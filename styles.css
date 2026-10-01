@@ -1,0 +1,469 @@
+/* Plugin Download Dashboard — all styling here; no inline JS styles.
+   Mirrors the Skill and Harness Manager look: a darker tab strip, a page in the
+   lighter grey, dark recessed cards with hairline borders, and Chrome-style tabs
+   whose active tab flares out of the strip. Uses Obsidian theme vars throughout
+   so it adapts to light/dark and custom themes. */
+
+.workspace-leaf-content .view-content.pdd-view {
+	padding: 0;
+}
+.pdd-view {
+	overflow-x: hidden;
+	background: var(--background-secondary-alt);
+}
+
+.pdd-tabcontent,
+.pdd-detailbody {
+	padding: 0 var(--size-4-2) var(--size-4-4);
+}
+
+/* --- Tab bar: Watchlist | Browse ---------------------------------------- */
+.pdd-tabbar {
+	display: flex;
+	align-items: flex-end;
+	gap: var(--size-2-1);
+	margin: 0 0 var(--size-4-2);
+	padding: var(--size-2-3) var(--size-4-2) 0;
+	background: var(--background-secondary);
+}
+.pdd-tab {
+	position: relative;
+	cursor: pointer;
+	box-sizing: border-box;
+	flex: 1 1 8.82em;
+	min-width: 0;
+	background: transparent;
+	border: none;
+	box-shadow: none;
+	padding: calc(var(--size-4-3) + 2.5px) var(--size-4-1);
+	color: var(--text-muted);
+	font-size: calc(var(--font-ui-small) * 0.9);
+	font-weight: var(--font-medium);
+	text-align: center;
+	white-space: nowrap;
+	overflow: visible;
+	text-overflow: ellipsis;
+	transition: color 0.1s ease;
+}
+.pdd-tab:not(.is-active):hover {
+	color: var(--text-normal);
+}
+.pdd-tab.is-active {
+	background: var(--background-secondary-alt);
+	color: var(--text-normal);
+	font-weight: var(--font-semibold);
+	border-top-left-radius: var(--radius-l);
+	border-top-right-radius: var(--radius-l);
+	z-index: 1;
+}
+.pdd-tab.is-active::before,
+.pdd-tab.is-active::after {
+	content: "";
+	position: absolute;
+	bottom: 0;
+	width: var(--radius-l);
+	height: var(--radius-l);
+}
+.pdd-tab.is-active::before {
+	left: calc(-1 * var(--radius-l));
+	background: radial-gradient(circle at top left, #0000 var(--radius-l), var(--background-secondary-alt) calc(var(--radius-l) + 0.5px));
+}
+.pdd-tab.is-active::after {
+	right: calc(-1 * var(--radius-l));
+	background: radial-gradient(circle at top right, #0000 var(--radius-l), var(--background-secondary-alt) calc(var(--radius-l) + 0.5px));
+}
+
+/* --- Search + toolbar --------------------------------------------------- */
+.pdd-searchbar {
+	display: flex;
+	align-items: center;
+	gap: var(--size-2-3);
+	margin-bottom: var(--size-2-3);
+}
+.pdd-search {
+	flex: 1 1 auto;
+	margin: 0;
+}
+.pdd-refresh-icon {
+	flex: 0 0 auto;
+	width: 28px;
+	height: 28px;
+	padding: 0;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+}
+.pdd-refresh-icon.is-busy {
+	opacity: 0.5;
+	pointer-events: none;
+}
+.pdd-count {
+	color: var(--text-muted);
+	font-size: var(--font-ui-smaller);
+	margin-bottom: var(--size-2-3);
+}
+
+/* Segmented All / Plugins / Themes filter. */
+.pdd-kindbar {
+	display: flex;
+	gap: var(--size-2-1);
+	margin-bottom: var(--size-4-2);
+}
+.pdd-kind {
+	flex: 0 0 auto;
+	padding: var(--size-2-1) var(--size-4-2);
+	font-size: var(--font-ui-smaller);
+	color: var(--text-muted);
+	background: var(--background-secondary);
+	border: 1px solid var(--background-modifier-border);
+	border-radius: var(--radius-s);
+	cursor: pointer;
+	box-shadow: none;
+}
+.pdd-kind:hover {
+	color: var(--text-normal);
+}
+.pdd-kind.is-active {
+	color: var(--text-on-accent);
+	background: var(--interactive-accent);
+	border-color: var(--interactive-accent);
+}
+
+/* --- Cards -------------------------------------------------------------- */
+.pdd-list {
+	display: flex;
+	flex-direction: column;
+	gap: var(--size-2-3);
+}
+.pdd-card {
+	display: flex;
+	flex-direction: column;
+	gap: var(--size-2-3);
+	padding: var(--size-4-2);
+	background: var(--background-secondary);
+	border: 1px solid var(--background-modifier-border);
+	border-radius: var(--radius-m);
+	transition: border-color 0.1s ease;
+}
+.pdd-card:hover {
+	border-color: var(--background-modifier-border-hover);
+}
+.pdd-card.is-clickable {
+	cursor: pointer;
+}
+.pdd-card-main {
+	min-width: 0;
+}
+.pdd-nameline {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+.pdd-name {
+	font-size: var(--font-ui-small);
+	font-weight: var(--font-medium);
+	color: var(--text-normal);
+}
+.pdd-badge {
+	font-size: var(--font-ui-smaller);
+	color: var(--text-muted);
+	background: var(--background-secondary-alt);
+	border: 1px solid var(--background-modifier-border);
+	border-radius: var(--radius-s);
+	padding: 0 6px;
+}
+.pdd-desc {
+	color: var(--text-muted);
+	font-size: var(--font-ui-smaller);
+	margin: var(--size-2-1) 0;
+}
+.pdd-sub {
+	color: var(--text-faint);
+	font-size: var(--font-ui-smaller);
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.pdd-cardstats {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: var(--size-2-3) var(--size-4-2);
+	margin-top: var(--size-2-2);
+}
+.pdd-stat {
+	display: inline-flex;
+	align-items: center;
+	gap: var(--size-2-1);
+	font-size: var(--font-ui-smaller);
+	color: var(--text-muted);
+}
+.pdd-stat-icon {
+	display: inline-flex;
+	color: var(--text-faint);
+}
+.pdd-stat-icon .svg-icon {
+	width: var(--icon-xs);
+	height: var(--icon-xs);
+}
+
+.pdd-actions {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: var(--size-4-1) var(--size-4-2);
+}
+.pdd-action {
+	box-sizing: border-box;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: var(--size-4-1);
+	min-height: 28px;
+	padding: var(--size-2-1) var(--size-4-2);
+	cursor: pointer;
+	white-space: nowrap;
+	font-size: var(--font-ui-smaller);
+}
+.pdd-action:hover {
+	background: var(--background-modifier-hover);
+}
+.pdd-action.is-busy {
+	opacity: 0.5;
+	pointer-events: none;
+}
+.pdd-action-primary {
+	color: var(--text-accent);
+	font-weight: var(--font-semibold);
+}
+.pdd-action.is-watched {
+	color: var(--text-accent);
+}
+.pdd-action .svg-icon {
+	width: var(--icon-s);
+	height: var(--icon-s);
+}
+
+/* --- Empty states ------------------------------------------------------- */
+.pdd-empty {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 8px;
+	color: var(--text-muted);
+	padding: var(--size-4-6) var(--size-4-2);
+	text-align: center;
+	max-width: 30em;
+	margin: 0 auto;
+}
+.pdd-empty-icon {
+	display: inline-flex;
+	color: var(--text-faint);
+}
+.pdd-empty-icon .svg-icon {
+	width: var(--icon-l);
+	height: var(--icon-l);
+}
+.pdd-empty-title {
+	font-weight: var(--font-semibold);
+	color: var(--text-normal);
+}
+.pdd-empty-body {
+	font-size: var(--font-ui-smaller);
+}
+
+/* --- Detail (dashboard) view -------------------------------------------- */
+.pdd-detailbar {
+	display: flex;
+	align-items: center;
+	gap: var(--size-2-3);
+	padding: var(--size-2-3) var(--size-4-2);
+	margin-bottom: var(--size-4-2);
+	background: var(--background-secondary);
+	border-bottom: 1px solid var(--background-modifier-border);
+}
+.pdd-detail-titlewrap {
+	flex: 1 1 auto;
+	min-width: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 1px;
+}
+.pdd-detail-title {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	font-weight: var(--font-semibold);
+	color: var(--text-normal);
+}
+.pdd-repo-link {
+	display: inline-flex;
+	align-items: center;
+	gap: var(--size-2-1);
+	max-width: 100%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	font-size: var(--font-ui-smaller);
+	color: var(--text-muted);
+	text-decoration: none;
+}
+.pdd-repo-link:hover {
+	color: var(--text-accent);
+	text-decoration: underline;
+}
+.pdd-repo-link-icon {
+	display: inline-flex;
+	flex: 0 0 auto;
+}
+.pdd-repo-link-icon .svg-icon {
+	width: var(--icon-xs);
+	height: var(--icon-xs);
+}
+
+/* Raw-data modal. */
+.pdd-raw-note {
+	color: var(--text-muted);
+	font-size: var(--font-ui-smaller);
+	margin-top: 0;
+}
+.pdd-raw-tablescroll {
+	max-height: 240px;
+	overflow-y: auto;
+	margin-bottom: var(--size-4-3);
+}
+.pdd-raw-wrap {
+	border-top: 1px solid var(--background-modifier-border);
+	padding-top: var(--size-4-2);
+}
+.pdd-raw-bar {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: var(--size-2-3);
+	margin-bottom: var(--size-2-3);
+}
+.pdd-delta-up {
+	color: var(--text-success);
+}
+.pdd-delta-down {
+	color: var(--text-error);
+}
+.pdd-raw-json {
+	max-height: 280px;
+	overflow: auto;
+	margin: 0;
+	padding: var(--size-4-2);
+	background: var(--background-primary-alt);
+	border: 1px solid var(--background-modifier-border);
+	border-radius: var(--radius-s);
+	font-family: var(--font-monospace);
+	font-size: var(--font-ui-smaller);
+	white-space: pre;
+	user-select: text;
+}
+
+/* "Live view" hint shown on an unwatched (browse) plugin's dashboard. */
+.pdd-detail-hint {
+	display: flex;
+	align-items: flex-start;
+	gap: var(--size-2-2);
+	padding: var(--size-2-3) var(--size-4-2);
+	margin-bottom: var(--size-4-3);
+	background: var(--background-secondary);
+	border: 1px solid var(--background-modifier-border);
+	border-radius: var(--radius-m);
+	color: var(--text-muted);
+	font-size: var(--font-ui-smaller);
+}
+.pdd-detail-hint-icon {
+	display: inline-flex;
+	flex: 0 0 auto;
+	color: var(--text-accent);
+	margin-top: 1px;
+}
+.pdd-detail-hint-icon .svg-icon {
+	width: var(--icon-s);
+	height: var(--icon-s);
+}
+
+/* Confirmation modal (unwatch). */
+.pdd-modal-buttons {
+	display: flex;
+	justify-content: flex-end;
+	gap: var(--size-2-3);
+	margin-top: var(--size-4-3);
+}
+
+.pdd-charts {
+	display: flex;
+	flex-direction: column;
+	gap: var(--size-4-3);
+	margin-bottom: var(--size-4-4);
+}
+.pdd-chart {
+	width: 100%;
+	min-width: 0;
+	background: var(--background-secondary);
+	border: 1px solid var(--background-modifier-border);
+	border-radius: var(--radius-m);
+	padding: var(--size-4-2);
+}
+.pdd-chart-title {
+	font-size: var(--font-ui-smaller);
+	font-weight: var(--font-semibold);
+	color: var(--text-muted);
+	text-transform: uppercase;
+	letter-spacing: 0.03em;
+	margin-bottom: var(--size-2-3);
+}
+.pdd-plot {
+	width: 100%;
+}
+
+/* --- Releases table ----------------------------------------------------- */
+.pdd-tablewrap {
+	background: var(--background-secondary);
+	border: 1px solid var(--background-modifier-border);
+	border-radius: var(--radius-m);
+	padding: var(--size-4-2);
+}
+.pdd-tablescroll {
+	max-height: 320px;
+	overflow-y: auto;
+}
+.pdd-table {
+	width: 100%;
+	border-collapse: collapse;
+	font-size: var(--font-ui-smaller);
+}
+.pdd-table th {
+	position: sticky;
+	top: 0;
+	background: var(--background-secondary);
+	text-align: left;
+	color: var(--text-muted);
+	font-weight: var(--font-semibold);
+	padding: var(--size-2-2) var(--size-2-3);
+	border-bottom: 1px solid var(--background-modifier-border);
+}
+.pdd-table td {
+	padding: var(--size-2-2) var(--size-2-3);
+	border-bottom: 1px solid var(--background-modifier-border);
+	color: var(--text-normal);
+	white-space: nowrap;
+}
+.pdd-table tbody tr:hover {
+	background: var(--background-modifier-hover);
+}
+.pdd-table .pdd-num {
+	text-align: right;
+	font-variant-numeric: tabular-nums;
+}
+
+/* Combined timeline: capture rows read as muted sub-entries between the
+   release rows, which stay in the normal text color. */
+.pdd-table tr.pdd-row-capture td {
+	color: var(--text-muted);
+}

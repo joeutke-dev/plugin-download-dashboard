@@ -1,0 +1,31 @@
+{
+	"name": "plugin-download-dashboard",
+	"version": "0.1.0",
+	"description": "Watchlist Obsidian community plugins and themes and chart their download trends over time.",
+	"main": "main.js",
+	"scripts": {
+		"dev": "node esbuild.config.mjs",
+		"build": "tsc -noEmit -skipLibCheck && node esbuild.config.mjs production",
+		"version": "node version-bump.mjs && git add manifest.json versions.json",
+		"test": "node test/smoke.mjs"
+	},
+	"keywords": [
+		"obsidian",
+		"obsidian-plugin",
+		"community",
+		"downloads",
+		"analytics"
+	],
+	"author": "Joe Utke",
+	"license": "MIT",
+	"dependencies": {
+		"plotly.js-dist-min": "^2.35.2"
+	},
+	"devDependencies": {
+		"@types/node": "^20.11.0",
+		"esbuild": "^0.21.5",
+		"obsidian": "latest",
+		"tslib": "^2.6.2",
+		"typescript": "^5.4.5"
+	}
+}

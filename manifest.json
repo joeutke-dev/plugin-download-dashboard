@@ -1,0 +1,10 @@
+{
+	"id": "plugin-download-dashboard",
+	"name": "Plugin Download Dashboard",
+	"version": "0.1.0",
+	"minAppVersion": "1.4.0",
+	"description": "Watchlist Obsidian community plugins and themes and chart their download trends over time.",
+	"author": "Joe Utke",
+	"authorUrl": "https://github.com/joeutke-dev",
+	"isDesktopOnly": true
+}
